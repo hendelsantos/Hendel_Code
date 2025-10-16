@@ -1782,3 +1782,73 @@ section {
         font-size: 1rem;
     }
 }
+
+/* Form Messages Styles */
+.form-message {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    animation: slideIn 0.5s ease;
+}
+
+.form-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.form-message h3 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.form-message p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.form-message.success {
+    background: rgba(46, 204, 113, 0.1);
+    border: 2px solid #2ecc71;
+    color: #2ecc71;
+}
+
+.form-message.error {
+    background: rgba(231, 76, 60, 0.1);
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Loading State */
+.contact-form.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.contact-form.loading .btn::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

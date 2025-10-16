@@ -741,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initNavbarScroll();
         initScrollAnimations();
         loadProjects();
-        initContactForm();
+        initContactForm(); // Inicializar formulário de contato
         initCardEffects();
         initScrollToTop();
         initParallax();
@@ -859,11 +859,132 @@ function createMatrixRain() {
     }, 10000);
 }
 
+// Contact Form Functionality
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('form-success');
+    const errorMessage = document.getElementById('form-error');
+    
+    if (!form) return;
+    
+    // Check for success parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        showFormMessage('success');
+        // Remove success parameter from URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    
+    form.addEventListener('submit', async function(e) {
+        // Se não estiver usando Formspree, prevenir envio padrão
+        if (form.action.includes('YOUR_FORM_ID')) {
+            e.preventDefault();
+            alert('⚠️ Configure o Formspree primeiro!\n\n1. Acesse https://formspree.io/\n2. Crie uma conta\n3. Substitua YOUR_FORM_ID pelo ID real\n4. Teste novamente');
+            return;
+        }
+        
+        // Adicionar estado de loading
+        form.classList.add('loading');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        
+        // Formspree handles the actual submission
+        // The form will redirect automatically or show success message
+    });
+    
+    // Handle form reset after submission
+    form.addEventListener('reset', function() {
+        hideFormMessages();
+    });
+}
+
+function showFormMessage(type) {
+    const successMessage = document.getElementById('form-success');
+    const errorMessage = document.getElementById('form-error');
+    
+    hideFormMessages();
+    
+    if (type === 'success' && successMessage) {
+        successMessage.style.display = 'block';
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (type === 'error' && errorMessage) {
+        errorMessage.style.display = 'block';
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function hideFormMessages() {
+    const successMessage = document.getElementById('form-success');
+    const errorMessage = document.getElementById('form-error');
+    
+    if (successMessage) successMessage.style.display = 'none';
+    if (errorMessage) errorMessage.style.display = 'none';
+}
+
+// Enhanced Form Validation
+function validateForm(form) {
+    const name = form.querySelector('#name').value.trim();
+    const email = form.querySelector('#email').value.trim();
+    const message = form.querySelector('#message').value.trim();
+    
+    if (!name || name.length < 2) {
+        showFormError('Nome deve ter pelo menos 2 caracteres');
+        return false;
+    }
+    
+    if (!email || !isValidEmail(email)) {
+        showFormError('Email inválido');
+        return false;
+    }
+    
+    if (!message || message.length < 10) {
+        showFormError('Mensagem deve ter pelo menos 10 caracteres');
+        return false;
+    }
+    
+    return true;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showFormError(message) {
+    // Create temporary error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'form-validation-error';
+    errorDiv.textContent = message;
+    errorDiv.style.cssText = `
+        background: rgba(231, 76, 60, 0.1);
+        border: 1px solid #e74c3c;
+        color: #e74c3c;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+        text-align: center;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    const form = document.getElementById('contact-form');
+    form.insertBefore(errorDiv, form.firstChild);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        if (errorDiv.parentNode) {
+            errorDiv.remove();
+        }
+    }, 5000);
+}
+
 // Export functions for testing (if needed)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         typeText,
         showNotification,
-        loadProjects
+        loadProjects,
+        initContactForm,
+        validateForm
     };
 }
