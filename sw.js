@@ -1,10 +1,10 @@
 // Service Worker para Portfolio Hendel Santos
-const CACHE_NAME = 'hendel-portfolio-v1';
+const CACHE_NAME = 'hendel-portfolio-v1760580007'; // Versão atualizada
 const urlsToCache = [
     '/',
     '/index.html',
-    '/styles.css',
-    '/script.js',
+    '/styles.css?v=1760580007',
+    '/script.js?v=1760580007',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
     'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap',
     'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
