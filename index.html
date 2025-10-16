@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Hendel Santos - Desenvolvedor Full Stack</title>
-    <link rel="stylesheet" href="styles.css?v=1760579197">
+    <link rel="stylesheet" href="styles.css?v=1760579548">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -834,30 +834,33 @@
                 </div>
 
                 <div class="contact-form-container">
-                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xzzjykkr"
-                        method="POST">
+                    <!-- Formulário Direto do Formspree - SEM JavaScript interferindo -->
+                    <form class="contact-form" action="https://formspree.io/f/xzzjykkr" method="POST">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" name="name" required>
                             <label for="name">Nome</label>
                         </div>
 
                         <div class="form-group">
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" name="email" required>
                             <label for="email">Email</label>
                         </div>
 
                         <div class="form-group">
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <textarea name="message" rows="5" required></textarea>
                             <label for="message">Mensagem</label>
                         </div>
 
-                        <!-- Campo oculto para identificar o site -->
-                        <input type="hidden" name="_subject" value="Novo contato do Portfolio - Hendel Santos">
+                        <!-- Campos Formspree -->
+                        <input type="hidden" name="_subject" value="💼 Contato Portfolio - Hendel Santos">
+                        <input type="hidden" name="_next" value="https://hendelcode.com.br/?sent=success">
+                        <input type="hidden" name="_captcha" value="false">
                         
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i>
                             Enviar Mensagem
                         </button>
+                    </form>
                     </form>
 
                     <!-- Mensagem de sucesso -->
@@ -898,7 +901,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js?v=1760579197"></script>
+    <script src="script.js?v=1760579548"></script>
 </body>
 
 </html>

@@ -859,46 +859,21 @@ function createMatrixRain() {
     }, 10000);
 }
 
-// Contact Form Functionality
+// Contact Form Functionality - DESABILITADO para permitir Formspree funcionar
 function initContactForm() {
-    const form = document.getElementById('contact-form');
-    const successMessage = document.getElementById('form-success');
-    const errorMessage = document.getElementById('form-error');
+    // Formulário agora funciona diretamente com Formspree sem JavaScript
+    console.log('✅ Formulário configurado para trabalhar diretamente com Formspree');
     
-    if (!form) return;
-    
-    // Check for success parameter in URL
+    // Apenas verificar se existe parâmetro de sucesso na URL
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true') {
+    if (urlParams.get('sent') === 'success') {
         showFormMessage('success');
         // Remove success parameter from URL
         window.history.replaceState({}, document.title, window.location.pathname);
     }
     
-    form.addEventListener('submit', async function(e) {
-        // Se não estiver usando Formspree, prevenir envio padrão
-        if (form.action.includes('YOUR_FORM_ID')) {
-            e.preventDefault();
-            alert('⚠️ Configure o Formspree primeiro!\n\n1. Acesse https://formspree.io/\n2. Crie uma conta\n3. Substitua YOUR_FORM_ID pelo ID real\n4. Teste novamente');
-            return;
-        }
-        
-        // Para Formspree configurado, permitir envio normal sem interferência
-        console.log('Formulário sendo enviado para:', form.action);
-        
-        // Opcional: adicionar estado de loading sem impedir o envio
-        form.classList.add('loading');
-        const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-        
-        // Deixar o Formspree processar naturalmente
-        // Não prevenir o envio padrão para permitir que o Formspree funcione
-    });
-    
-    // Handle form reset after submission
-    form.addEventListener('reset', function() {
-        hideFormMessages();
-    });
+    // Não adicionar event listeners que podem interferir
+    console.log('📧 Formulário pronto - envios diretos para Formspree');
 }
 
 function showFormMessage(type) {
