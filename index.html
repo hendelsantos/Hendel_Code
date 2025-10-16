@@ -9,7 +9,7 @@
     <meta http-equiv="Expires" content="0">
     <meta name="cache-buster" content="1760579987">
     <title>Hendel Santos - Desenvolvedor Full Stack</title>
-    <link rel="stylesheet" href="styles.css?v=1760580292">
+    <link rel="stylesheet" href="styles.css?v=1760580661">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -835,32 +835,70 @@
                 </div>
 
                 <div class="contact-form-container">
-                    <!-- Formulário SIMPLIFICADO - Garantido para funcionar -->
-                    <form action="https://formspree.io/f/xzzjykkr" method="POST" style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <!-- MÉTODO 1: Formspree com Target Blank (Mais Confiável) -->
+                    <div id="formspree-form">
+                        <h4 style="color: #fff; margin-bottom: 15px;">📧 Formulário de Contato</h4>
                         
-                        <div style="margin-bottom: 15px;">
-                            <label for="contact-name" style="display: block; margin-bottom: 5px; font-weight: bold;">Nome:</label>
-                            <input type="text" id="contact-name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                        </div>
+                        <!-- Form que abre em nova aba - GARANTIDO -->
+                        <form action="https://formspree.io/f/xzzjykkr" method="POST" target="_blank" 
+                              style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0; backdrop-filter: blur(10px);"
+                              onsubmit="return handleFormSubmit(this)">
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #fff;">Nome:</label>
+                                <input type="text" name="name" required 
+                                       style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box;">
+                            </div>
 
-                        <div style="margin-bottom: 15px;">
-                            <label for="contact-email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
-                            <input type="email" id="contact-email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                        </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #fff;">Email:</label>
+                                <input type="email" name="email" required 
+                                       style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box;">
+                            </div>
 
-                        <div style="margin-bottom: 15px;">
-                            <label for="contact-message" style="display: block; margin-bottom: 5px; font-weight: bold;">Mensagem:</label>
-                            <textarea id="contact-message" name="message" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; min-height: 100px;"></textarea>
-                        </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #fff;">Mensagem:</label>
+                                <textarea name="message" required 
+                                          style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; font-size: 16px; resize: vertical; box-sizing: border-box;"></textarea>
+                            </div>
 
-                        <!-- Campos Formspree -->
-                        <input type="hidden" name="_subject" value="💼 Contato Portfolio - Hendel Santos">
-                        <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_subject" value="💼 Contato Portfolio - Hendel Santos">
+                            
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button type="submit" 
+                                        style="flex: 1; min-width: 200px; background: linear-gradient(45deg, #007bff, #0056b3); color: white; padding: 15px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">
+                                    📧 Enviar (Nova Aba)
+                                </button>
+                                <button type="button" onclick="sendViaMailto()" 
+                                        style="flex: 1; min-width: 200px; background: linear-gradient(45deg, #28a745, #20c997); color: white; padding: 15px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">
+                                    ✉️ Abrir no Email
+                                </button>
+                            </div>
+                        </form>
                         
-                        <button type="submit" style="background: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
-                            📧 Enviar Mensagem
-                        </button>
-                    </form>                    <!-- Mensagem de sucesso -->
+                        <div id="submit-message" style="display: none; background: rgba(46, 204, 113, 0.2); border: 2px solid #2ecc71; color: #2ecc71; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center;">
+                            <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+                            <strong>Formulário enviado!</strong> Verifique a nova aba para completar o envio.
+                        </div>
+                    </div>
+                    
+                    <!-- MÉTODO 2: Links Diretos -->
+                    <div style="margin: 20px 0; text-align: center;">
+                        <p style="color: #ccc; margin-bottom: 15px;">Ou entre em contato diretamente:</p>
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <a href="mailto:hendelosantos@outlook.com?subject=Contato%20do%20Portfolio&body=Olá%20Hendel,%0A%0AGostaria%20de%20entrar%20em%20contato%20sobre:%0A%0A[Descreva%20seu%20interesse]%0A%0AAtenciosamente," 
+                               style="background: linear-gradient(45deg, #0078d4, #106ebe); color: white; padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-envelope"></i>
+                                Email Direto
+                            </a>
+                            <a href="https://github.com/hendelsantos" 
+                               target="_blank"
+                               style="background: linear-gradient(45deg, #333, #24292e); color: white; padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px;">
+                                <i class="fab fa-github"></i>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>                    <!-- Mensagem de sucesso -->
                     <div id="form-success" class="form-message success" style="display: none;">
                         <i class="fas fa-check-circle"></i>
                         <h3>Mensagem Enviada!</h3>
@@ -896,9 +934,65 @@
         </div>
     </footer>
 
+    <!-- JavaScript para Formulário de Contato -->
+    <script>
+        // Função para lidar com envio do formulário
+        function handleFormSubmit(form) {
+            // Mostrar mensagem de confirmação
+            const messageDiv = document.getElementById('submit-message');
+            if (messageDiv) {
+                messageDiv.style.display = 'block';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Permitir envio normal do formulário
+            return true;
+        }
+        
+        // Função para enviar via mailto (pega dados do formulário)
+        function sendViaMailto() {
+            const form = document.querySelector('form[action*="formspree"]');
+            const name = form.querySelector('input[name="name"]').value;
+            const email = form.querySelector('input[name="email"]').value;
+            const message = form.querySelector('textarea[name="message"]').value;
+            
+            if (!name || !email || !message) {
+                alert('Por favor, preencha todos os campos antes de enviar.');
+                return;
+            }
+            
+            const subject = encodeURIComponent('💼 Contato do Portfolio - ' + name);
+            const body = encodeURIComponent(
+                `Olá Hendel,\n\n` +
+                `Nome: ${name}\n` +
+                `Email: ${email}\n\n` +
+                `Mensagem:\n${message}\n\n` +
+                `Enviado via Portfolio`
+            );
+            
+            const mailtoLink = `mailto:hendelosantos@outlook.com?subject=${subject}&body=${body}`;
+            window.open(mailtoLink);
+            
+            // Mostrar mensagem de confirmação
+            const messageDiv = document.getElementById('submit-message');
+            if (messageDiv) {
+                messageDiv.innerHTML = `
+                    <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+                    <strong>Email aberto!</strong> Complete o envio no seu aplicativo de email.
+                `;
+                messageDiv.style.display = 'block';
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js?v=1760580292"></script>
+    <script src="script.js?v=1760580661"></script>
 </body>
 
 </html>
