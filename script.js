@@ -859,21 +859,19 @@ function createMatrixRain() {
     }, 10000);
 }
 
-// Contact Form Functionality - DESABILITADO para permitir Formspree funcionar
+// Contact Form Functionality - COMPLETAMENTE DESABILITADO
 function initContactForm() {
-    // Formulário agora funciona diretamente com Formspree sem JavaScript
-    console.log('✅ Formulário configurado para trabalhar diretamente com Formspree');
+    // Formulário funciona 100% nativo sem qualquer JavaScript
+    console.log('✅ Formulário funciona nativamente com Formspree - JavaScript desabilitado');
     
-    // Apenas verificar se existe parâmetro de sucesso na URL
+    // Verificar apenas parâmetro de sucesso na URL (opcional)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('sent') === 'success') {
-        showFormMessage('success');
-        // Remove success parameter from URL
-        window.history.replaceState({}, document.title, window.location.pathname);
+        console.log('✅ Formulário enviado com sucesso!');
     }
     
-    // Não adicionar event listeners que podem interferir
-    console.log('📧 Formulário pronto - envios diretos para Formspree');
+    // NÃO buscar formulário, NÃO adicionar listeners, NÃO interferir
+    return;
 }
 
 function showFormMessage(type) {
@@ -929,30 +927,9 @@ function isValidEmail(email) {
 }
 
 function showFormError(message) {
-    // Create temporary error message
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'form-validation-error';
-    errorDiv.textContent = message;
-    errorDiv.style.cssText = `
-        background: rgba(231, 76, 60, 0.1);
-        border: 1px solid #e74c3c;
-        color: #e74c3c;
-        padding: 1rem;
-        border-radius: 8px;
-        margin: 1rem 0;
-        text-align: center;
-        animation: slideIn 0.3s ease;
-    `;
-    
-    const form = document.getElementById('contact-form');
-    form.insertBefore(errorDiv, form.firstChild);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        if (errorDiv.parentNode) {
-            errorDiv.remove();
-        }
-    }, 5000);
+    // Função desabilitada - formulário funciona nativamente
+    console.log('Form error (desabilitado):', message);
+    return;
 }
 
 // Export functions for testing (if needed)
