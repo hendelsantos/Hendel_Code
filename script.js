@@ -883,14 +883,16 @@ function initContactForm() {
             return;
         }
         
-        // Adicionar estado de loading
+        // Para Formspree configurado, permitir envio normal sem interferência
+        console.log('Formulário sendo enviado para:', form.action);
+        
+        // Opcional: adicionar estado de loading sem impedir o envio
         form.classList.add('loading');
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         
-        // Formspree handles the actual submission
-        // The form will redirect automatically or show success message
+        // Deixar o Formspree processar naturalmente
+        // Não prevenir o envio padrão para permitir que o Formspree funcione
     });
     
     // Handle form reset after submission
